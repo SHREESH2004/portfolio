@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react';
+import Image from 'next/image'; // Import Image from next/image
 import { cn } from "@/lib/utils"; // Utility function for conditional classes
 
 interface BentoGridItemProps {
@@ -37,7 +38,14 @@ export const BentoGridItem: React.FC<BentoGridItemProps> = ({
       {/* Image Section */}
       {image && (
         <div className="relative w-full h-48 bg-gray-200 dark:bg-neutral-700 overflow-hidden rounded-lg mb-4">
-          <img src={image} alt={title as string} className="object-cover w-full h-full" />
+          <Image 
+            src={image} 
+            alt={title as string} 
+            layout="responsive" // Ensures the image is responsive
+            width={500} // You can adjust the width to your preference
+            height={300} // Adjust the height as well
+            className="object-cover w-full h-full"
+          />
         </div>
       )}
 

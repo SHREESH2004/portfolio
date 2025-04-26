@@ -25,11 +25,6 @@ export const AnimatedTestimonials = ({
     setActive((prev) => (prev + 1) % testimonials.length);
   }, [testimonials.length]);
 
-  // Handle going to the previous testimonial
-  const handlePrev = () => {
-    setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
-
   // Check if the testimonial is currently active
   const isActive = (index: number) => index === active;
 

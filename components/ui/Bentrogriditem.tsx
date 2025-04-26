@@ -1,6 +1,5 @@
-// BentoGridItem.tsx
-
 import React from 'react';
+import Image from 'next/image';  // Import Image from next/image
 
 export interface BentoGridItemProps {
   title: string;
@@ -24,9 +23,18 @@ const BentoGridItem: React.FC<BentoGridItemProps> = ({
   return (
     <div className={`bento-grid-item ${className}`} onClick={onClick}>
       <div className="icon">{icon}</div>
+
+      {/* Replace the <img> tag with <Image /> */}
       <div className="image">
-        <img src={image} alt={title} />
+        <Image 
+          src={image} 
+          alt={title} 
+          width={500}  // You can set the desired width for your image
+          height={300} // You can set the desired height for your image
+          layout="responsive" // Ensure the image is responsive
+        />
       </div>
+
       <h3>{title}</h3>
       <p>{description}</p>
       {button}  {/* Render the button if passed */}

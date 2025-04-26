@@ -3,11 +3,10 @@
 import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { useOutsideClick } from "@/hooks/use-outside-click";
+import Image from 'next/image';
 
 export function ExpandableCardDemo() {
-    const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(
-        null
-    );
+    const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(null);
     const ref = useRef<HTMLDivElement | null>(null);
 
     const id = useId();
@@ -30,6 +29,7 @@ export function ExpandableCardDemo() {
     }, [active]);
 
     useOutsideClick(ref as React.RefObject<HTMLDivElement>, () => setActive(null));
+
     return (
         <>
             <AnimatePresence>
@@ -44,16 +44,12 @@ export function ExpandableCardDemo() {
             </AnimatePresence>
             <AnimatePresence>
                 {active && typeof active === "object" ? (
-                    <div className="fixed inset-0  grid place-items-center z-[100]">
+                    <div className="fixed inset-0 grid place-items-center z-[100]">
                         <motion.button
                             key={`button-${active.title}-${id}`}
                             layout
-                            initial={{
-                                opacity: 0,
-                            }}
-                            animate={{
-                                opacity: 1,
-                            }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
                             exit={{
                                 opacity: 0,
                                 transition: {
@@ -68,10 +64,10 @@ export function ExpandableCardDemo() {
                         <motion.div
                             layoutId={`card-${active.title}-${id}`}
                             ref={ref}
-                            className="w-full max-w-[500px]  h-full md:h-fit md:max-h-[90%]  flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden"
+                            className="w-full max-w-[500px] h-full md:h-fit md:max-h-[90%] flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden"
                         >
                             <motion.div layoutId={`image-${active.title}-${id}`}>
-                                <img
+                                <Image
                                     width={200}
                                     height={200}
                                     src={active.src}
@@ -82,7 +78,7 @@ export function ExpandableCardDemo() {
 
                             <div>
                                 <div className="flex justify-between items-start p-4">
-                                    <div className="">
+                                    <div>
                                         <motion.h3
                                             layoutId={`title-${active.title}-${id}`}
                                             className="font-bold text-neutral-700 dark:text-neutral-200"
@@ -125,16 +121,16 @@ export function ExpandableCardDemo() {
                 ) : null}
             </AnimatePresence>
             <ul className="max-w-2xl mx-auto w-full gap-4">
-                {cards.map((card, index) => (
+                {cards.map((card) => (
                     <motion.div
                         layoutId={`card-${card.title}-${id}`}
                         key={`card-${card.title}-${id}`}
                         onClick={() => setActive(card)}
                         className="p-4 flex flex-col md:flex-row justify-between items-center hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl cursor-pointer"
                     >
-                        <div className="flex gap-4 flex-col md:flex-row ">
+                        <div className="flex gap-4 flex-col md:flex-row">
                             <motion.div layoutId={`image-${card.title}-${id}`}>
-                                <img
+                                <Image
                                     width={100}
                                     height={100}
                                     src={card.src}
@@ -142,7 +138,7 @@ export function ExpandableCardDemo() {
                                     className="h-40 w-40 md:h-14 md:w-14 rounded-lg object-cover object-top"
                                 />
                             </motion.div>
-                            <div className="">
+                            <div>
                                 <motion.h3
                                     layoutId={`title-${card.title}-${id}`}
                                     className="font-medium text-neutral-800 dark:text-neutral-200 text-center md:text-left"
@@ -173,12 +169,8 @@ export function ExpandableCardDemo() {
 export const CloseIcon = () => {
     return (
         <motion.svg
-            initial={{
-                opacity: 0,
-            }}
-            animate={{
-                opacity: 1,
-            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
             exit={{
                 opacity: 0,
                 transition: {
@@ -204,7 +196,6 @@ export const CloseIcon = () => {
 };
 
 const cards = [
-
     {
         description: "ScrapeWeb",
         title: "Web Scraper",
@@ -214,13 +205,13 @@ const cards = [
         content: () => {
             return (
                 <p>
-                    Scraping_Website: A web scraping website that scrapes a web and stores all the images inside the web server and also generates the html file of the web link provided
+                    Scraping_Website: A web scraping website that scrapes a web and stores all the images inside the web server and also generates the html file of the web link provided.
                 </p>
             );
         },
     },
     {
-        description: "AI-powered streaming platform ",
+        description: "AI-powered streaming platform",
         title: "StreamHorizon",
         src: "https://cdn.dribbble.com/userupload/40864745/file/original-936e9a1547b340bd88beba7615ba9800.png?format=webp&resize=400x300&vertical=center",
         ctaText: "Stream",
@@ -228,103 +219,79 @@ const cards = [
         content: () => {
             return (
                 <p>
-                    <strong>Stream Horizon</strong> is a next-gen streaming platform that leverages AI to personalize content delivery, boost engagement, and provide a smooth viewing experience. <br /><br />
-                    Whether you're a casual viewer or a binge-watcher, Stream Horizon learns your preferences and serves up intelligent recommendations tailored just for you. Built with modern tech, it's optimized for speed, scalability, and seamless integration across devices. <br /><br />
-                    With a sleek interface and smart backend, it’s not just about streaming—it’s about discovering what you love, faster.
+                    <strong>Stream Horizon</strong> is a next-gen streaming platform that leverages AI to personalize content delivery, boost engagement, and provide a smooth viewing experience.
                 </p>
             );
         },
     },
     {
-        description: "Collaborative platform for developers ",
+        description: "Collaborative platform for developers",
         title: "CollabHub",
-        src: "https://kitchen.co/blog/wp-content/uploads/2022/04/collaborating-with-developers.png", // You can replace this with an appropriate image for CollabHub
+        src: "https://kitchen.co/blog/wp-content/uploads/2022/04/collaborating-with-developers.png",
         ctaText: "Collab",
         ctaLink: "https://github.com/SHREESH2004/ai_developer",
         content: () => {
             return (
                 <p>
-                    <strong>CollabHub</strong> is a cutting-edge platform where developers come together to build projects, chat in real time, and get AI-powered coding assistance. Whether you're working solo or in a team, CollabHub helps streamline the coding process with seamless collaboration tools. <br /><br />
-                    With features like project management, real-time chat, and AI-powered code generation, CollabHub fosters creativity and enhances productivity. Whether you're brainstorming ideas or coding your next big app, you’ll find everything you need to succeed under one roof.
+                    <strong>CollabHub</strong> is a cutting-edge platform where developers come together to build projects, chat in real time, and get AI-powered coding assistance.
                 </p>
             );
-        }
+        },
     },
     {
         description: "TweetMe",
         title: "MCP server that can tweet for you",
-        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhNbHqUc1H01VYqnX1KMQrkmRc5JB2Ici_sQ&s", // Replace with your actual image URL
+        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhNbHqUc1H01VYqnX1KMQrkmRc5JB2Ici_sQ&s",
         ctaText: "See",
-        ctaLink: "https://github.com/yourusername/TweetMe", // Replace with the actual GitHub link
+        ctaLink: "https://github.com/yourusername/TweetMe",
         content: () => {
-          return (
-            <p>
-              TweetMe: A powerful server-building application that allows users to easily create and host their own Minecraft servers. 
-              The platform provides an intuitive interface for configuring server settings, managing plugins, and ensuring smooth gameplay. 
-              TweetMe is designed to be scalable, secure, and user-friendly for players and administrators alike.
-            </p>
-          );
+            return (
+                <p>
+                    TweetMe: A powerful server-building application that allows users to easily create and host their own Minecraft servers.
+                </p>
+            );
         },
-      }
-      
-,    
+    },
     {
-        description: "Smart cab booking platform ",
+        description: "Smart cab booking platform",
         title: "CabY",
-        src: "https://kitchen.co/blog/wp-content/uploads/2022/04/collaborating-with-developers.png", // You can update this image to one that fits CabY
+        src: "https://kitchen.co/blog/wp-content/uploads/2022/04/collaborating-with-developers.png",
         ctaText: "Book",
         ctaLink: "https://github.com/SHREESH2004/cabY",
         content: () => {
             return (
                 <p>
-                    <strong>CabY</strong> revolutionizes urban commuting with a fast, secure, and intuitive cab booking experience. Whether you're heading to work, traveling across the city, or planning a late-night trip, CabY ensures you get a ride within minutes. <br /><br />
-                    Featuring real-time location tracking, smart fare calculations, and instant driver matching, the app offers everything today's commuters need. Built with a focus on speed and reliability, CabY simplifies everyday transportation with tech-first efficiency.
+                    <strong>CabY</strong> revolutionizes urban commuting with a fast, secure, and intuitive cab booking experience.
                 </p>
             );
         },
-    }
-,    
-{
-    description: "Zippy",
-    title: "E-Commerce Platform",
-    src: "https://www.indiafilings.com/learn/wp-content/uploads/2024/11/What-is-E-Commerce-Business.jpg", // Replace with your actual image URL
-    ctaText: "Order",
-    ctaLink: "Still working", // Replace with the actual GitHub link
-    content: () => {
-      return (
-        <p>
-          Zippy: A modern e-commerce platform that provides a seamless shopping experience for users. 
-          It includes an intuitive admin terminal for managing products, orders, and customers, 
-          with easy-to-use features for adding, editing, and tracking inventory.
-        </p>
-      );
     },
-  }
-,
-
     {
-        description: "SafeBot Eye",
-        title: "Arduino based Obstacle Detection System",
-        src: "https://content.instructables.com/FZG/0WQ6/K0R1L2J6/FZG0WQ6K0R1L2J6.jpg?auto=webp&frame=1&width=2100",
-        ctaText: "Play",
-        ctaLink: "https://ui.aceternity.com/templates",
+        description: "Zippy",
+        title: "E-Commerce Platform",
+        src: "https://www.indiafilings.com/learn/wp-content/uploads/2024/11/What-is-E-Commerce-Business.jpg",
+        ctaText: "Order",
+        ctaLink: "Still working",
         content: () => {
             return (
                 <p>
-                    Github Link: 'Still working not available now'
-                    The Arduino-Based Obstacle Detection System is a smart and efficient solution designed to detect and alert users of nearby obstacles using ultrasonic sensors
-                    🚧 Real-Time Obstacle Detection using ultrasonic sensors
-
-                    🧠 Arduino-Controlled Logic for fast and efficient processing
-
-                    📏 Accurate Distance Measurement with configurable threshold limits
-
-                    🔊 Buzzer or LED Alerts for immediate obstacle warnings
-
-                    ⚡ Low Power, High Efficiency embedded system design
-
-                    🔧 Easy Integration into mobile robots or smart carts
-
+                    Zippy: A modern e-commerce platform that provides a seamless shopping experience for users.
+                </p>
+            );
+        },
+    },
+    {
+        description: "SafeBot Eye",
+        title: "Arduino based Obstacle Detection System",
+        src: "https://content.instructables.com/ORIG/F5S/JNRW/IK11V7JK/F5SJNRWIK11V7JK.jpg?auto=webp&width=600&height=400&fit=bounds",
+        ctaText: "Buy",
+        ctaLink: "Still working",
+        content: () => {
+            return (
+                <p>
+                    Github Link: Still working not available now
+                    <br />
+                    The Arduino-Based Obstacle Detection System is a smart and efficient solution designed to detect and alert users of nearby obstacles using ultrasonic sensors.
                 </p>
             );
         },

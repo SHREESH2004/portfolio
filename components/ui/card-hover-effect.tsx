@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "motion/react";
-import { useState, useRef } from "react";
+import { useState } from "react";
 
 export const HoverEffect = ({
   items,
@@ -15,23 +15,7 @@ export const HoverEffect = ({
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  const [mouseX, setMouseX] = useState<number>(0);
-  const [mouseY, setMouseY] = useState<number>(0);
 
-  // Define the type of ref as HTMLDivElement to avoid the error
-  const ref = useRef<HTMLDivElement | null>(null); 
-
-  const distance = 100; // Example constant distance, replace with actual value
-  const bounds = ref.current ? ref.current.getBoundingClientRect() : { left: 0, top: 0 };
-
-  const widthTransform = 200;
-  const heightTransform = 300;
-  const widthTransformIcon = 50;
-  const heightTransformIcon = 50;
-  const width = 400;
-  const height = 500;
-  const widthIcon = 30;
-  const heightIcon = 30;
 
   return (
     <div className={cn("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-10", className)}>

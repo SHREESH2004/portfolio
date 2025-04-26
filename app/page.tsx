@@ -27,7 +27,6 @@ const Page = () => {
   const portfolioRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
   const recentProjectsRef = useRef<HTMLDivElement>(null);
-  const typewriterDemo4Ref = useRef<HTMLDivElement>(null);
   const [showHero, setShowHero] = useState(false);
 
   const handleScrollToPortfolio = () => {
