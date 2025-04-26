@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion"; // Correct import for framer-motion
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Image, { StaticImageData } from "next/image";
 
 type Testimonial = {
@@ -21,9 +21,9 @@ export const AnimatedTestimonials = ({
   const [active, setActive] = useState(0);
 
   // Handle going to the next testimonial
-  const handleNext = () => {
+  const handleNext = useCallback(() => {
     setActive((prev) => (prev + 1) % testimonials.length);
-  };
+  }, [testimonials.length]);
 
   // Handle going to the previous testimonial
   const handlePrev = () => {
@@ -39,7 +39,7 @@ export const AnimatedTestimonials = ({
       const interval = setInterval(handleNext, 5000);
       return () => clearInterval(interval);
     }
-  }, [autoplay]);
+  }, [autoplay, handleNext]);
 
   // Random Y-axis rotation for some visual flair
   const randomRotateY = () => Math.floor(Math.random() * 21) - 10;
@@ -55,11 +55,7 @@ export const AnimatedTestimonials = ({
             <AnimatePresence>
               {testimonials.map((testimonial, index) => (
                 <motion.div
-                  key={
-                    typeof testimonial.src === "string"
-                      ? testimonial.src
-                      : testimonial.name
-                  }
+                  key={typeof testimonial.src === "string" ? testimonial.src : testimonial.name}
                   initial={{
                     opacity: 0,
                     scale: 0.9,
@@ -71,9 +67,7 @@ export const AnimatedTestimonials = ({
                     scale: isActive(index) ? 1 : 0.95,
                     z: isActive(index) ? 0 : -100,
                     rotate: isActive(index) ? 0 : randomRotateY(),
-                    zIndex: isActive(index)
-                      ? 40
-                      : testimonials.length + 2 - index,
+                    zIndex: isActive(index) ? 40 : testimonials.length + 2 - index,
                     y: isActive(index) ? [0, -80, 0] : 0,
                   }}
                   exit={{
@@ -119,7 +113,7 @@ export const AnimatedTestimonials = ({
 
             <div className="mt-8">
               <p className="text-lg italic text-gray-600 dark:text-neutral-400">
-                "{current.quote}"
+                &quot;{current.quote}&quot;
               </p>
             </div>
 

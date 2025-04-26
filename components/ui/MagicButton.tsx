@@ -1,18 +1,25 @@
 "use client";
+
 import React from "react";
 import reactElementToJSXString from "react-element-to-jsx-string";
 import { toast, Toaster } from "sonner";
 import { ButtonsCard } from "./tailwindcss-buttons";
 
+export type ButtonItem = {
+  name: string;
+  description: string;
+  showDot: boolean;
+  component: React.ReactElement;
+  code?: string;
+};
+
 export function TailwindcssButtons() {
-  const copy = (button: any) => {
-    // If button has code, copy the code directly
+  const copy = (button: ButtonItem) => {
     if (button.code) {
       copyToClipboard(button.code);
       return;
     }
 
-    // If button doesn't have code, convert the JSX to string and copy
     const buttonString = reactElementToJSXString(button.component);
     if (buttonString) {
       copyToClipboard(buttonString);
@@ -33,10 +40,8 @@ export function TailwindcssButtons() {
 
   return (
     <div className="pb-40 px-4 w-full">
-      {/* Toast notifications */}
       <Toaster position="top-center" />
 
-      {/* Button grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full max-w-7xl mx-auto gap-10">
         {buttons.map((button, idx) => (
           <ButtonsCard key={idx} onClick={() => copy(button)}>
@@ -49,7 +54,7 @@ export function TailwindcssButtons() {
 }
 
 // Button definitions
-export const buttons = [
+export const buttons: ButtonItem[] = [
   {
     name: "Tailwindcss Connect",
     description: "Button featured on Tailwindcss Connect website",
@@ -60,7 +65,7 @@ export const buttons = [
           <span className="absolute inset-0 rounded-full bg-[image:radial-gradient(75%_100%_at_50%_0%,rgba(56,189,248,0.6)_0%,rgba(56,189,248,0)_75%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"></span>
         </span>
         <div className="relative flex space-x-2 items-center z-10 rounded-full bg-zinc-950 py-0.5 px-4 ring-1 ring-white/10">
-          <span>{`Tailwind Connect`}</span>
+          <span>Tailwind Connect</span>
           <svg
             width="16"
             height="16"

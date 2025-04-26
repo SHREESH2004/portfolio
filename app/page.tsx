@@ -23,15 +23,9 @@ const ExpandableCardDemo = dynamic(
   { ssr: false }
 );
 
-const TypewriterEffectDemo4 = dynamic(
-  () => import("@/components/Recentprojects").then((mod) => mod.TypewriterEffectDemo),
-  { ssr: false }
-);
-
 const Page = () => {
   const portfolioRef = useRef<HTMLDivElement>(null);
   const aboutRef = useRef<HTMLDivElement>(null);
-  const floatingDockRef = useRef<HTMLDivElement>(null);
   const recentProjectsRef = useRef<HTMLDivElement>(null);
   const typewriterDemo4Ref = useRef<HTMLDivElement>(null);
   const [showHero, setShowHero] = useState(false);
@@ -48,9 +42,6 @@ const Page = () => {
     recentProjectsRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleScrollToTypewriterDemo4 = () => {
-    typewriterDemo4Ref.current?.scrollIntoView({ behavior: "smooth" });
-  };
 
   const navItems = [
     { name: "Home", link: "#home", icon: <FaHome /> },

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { cn } from "@/lib/utils";
 import { BentoGridItem } from "./BnetoGrid"; // Ensure BentoGridItem accepts onClick
 import {
@@ -7,39 +7,32 @@ import {
   IconSignature,
   IconTableColumn,
   IconArrowWaveRightUp,
-  IconBoxAlignTopLeft,
   IconBoxAlignRightFilled,
 } from "@tabler/icons-react"; // Import your ExpandableCardDemo component
 
 export function BentoGridDemo() {
-
   return (
     <div className="w-full px-4 sm:px-6 lg:px-8 py-12">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
         {items.map((item, i) => (
-         <BentoGridItem
-         key={i}
-         title={item.title}
-         description={item.description}
-         icon={item.icon}
-         image={item.image}
-         className={cn(
-           "transition-transform duration-300 hover:scale-[1.02]",
-           i === 3 || i === 6 ? "md:col-span-2" : "",
-           item.title === "Recent Projects" && "cursor-pointer"
-         )}
-       />
-       
+          <BentoGridItem
+            key={i}
+            title={item.title}
+            description={item.description}
+            icon={item.icon}
+            image={item.image}
+            className={cn(
+              "transition-transform duration-300 hover:scale-[1.02]",
+              i === 3 || i === 6 ? "md:col-span-2" : "",
+              item.title === "Recent Projects" && "cursor-pointer"
+            )}
+          />
         ))}
       </div>
- {/* Conditionally render ExpandableCardDemo */}
+      {/* Conditionally render ExpandableCardDemo */}
     </div>
   );
 }
-
-const Skeleton = () => (
-  <div className="flex flex-1 w-full h-full min-h-[10rem] rounded-xl bg-gradient-to-br from-neutral-200 dark:from-neutral-900 dark:to-neutral-800 to-neutral-100" />
-);
 
 const items = [
   {
@@ -85,4 +78,3 @@ const items = [
     image: "https://mintbook.com/blog/wp-content/uploads/2019/08/5-Reasons-to-Invest-In-E-Learning-Tools-for-Your-Children.png",
   },
 ];
-

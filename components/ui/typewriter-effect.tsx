@@ -17,12 +17,10 @@ export const TypewriterEffect = ({
   className?: string;
   cursorClassName?: string;
 }) => {
-  const wordsArray = words.map((word) => {
-    return {
-      ...word,
-      text: word.text.split(""),
-    };
-  });
+  const wordsArray = words.map((word) => ({
+    ...word,
+    text: word.text.split(""),
+  }));
 
   const [scope, animate] = useAnimate();
   const isInView = useInView(scope);
@@ -43,31 +41,28 @@ export const TypewriterEffect = ({
         }
       );
     }
-  }, [isInView]);
+  }, [isInView, animate]); // ✅ Added 'animate' to dependency array
 
-  const renderWords = () => {
-    return (
-      <motion.div ref={scope} className="inline">
-        {wordsArray.map((word, idx) => (
-          <div key={`word-${idx}`} className="inline-block">
-            {word.text.map((char, index) => (
-              <motion.span
-                initial={{}}
-                key={`char-${index}`}
-                className={cn(
-                  `dark:text-white text-black opacity-0 hidden`,
-                  word.className
-                )}
-              >
-                {char}
-              </motion.span>
-            ))}
-            &nbsp;
-          </div>
-        ))}
-      </motion.div>
-    );
-  };
+  const renderWords = () => (
+    <motion.div ref={scope} className="inline">
+      {wordsArray.map((word, idx) => (
+        <div key={`word-${idx}`} className="inline-block">
+          {word.text.map((char, index) => (
+            <motion.span
+              key={`char-${index}`}
+              className={cn(
+                "dark:text-white text-black opacity-0 hidden",
+                word.className
+              )}
+            >
+              {char}
+            </motion.span>
+          ))}
+          &nbsp;
+        </div>
+      ))}
+    </motion.div>
+  );
 
   return (
     <div
@@ -107,32 +102,28 @@ export const TypewriterEffectSmooth = ({
   className?: string;
   cursorClassName?: string;
 }) => {
-  const wordsArray = words.map((word) => {
-    return {
-      ...word,
-      text: word.text.split(""),
-    };
-  });
+  const wordsArray = words.map((word) => ({
+    ...word,
+    text: word.text.split(""),
+  }));
 
-  const renderWords = () => {
-    return (
-      <div>
-        {wordsArray.map((word, idx) => (
-          <div key={`word-${idx}`} className="inline-block">
-            {word.text.map((char, index) => (
-              <span
-                key={`char-${index}`}
-                className={cn(`dark:text-white text-black`, word.className)}
-              >
-                {char}
-              </span>
-            ))}
-            &nbsp;
-          </div>
-        ))}
-      </div>
-    );
-  };
+  const renderWords = () => (
+    <div>
+      {wordsArray.map((word, idx) => (
+        <div key={`word-${idx}`} className="inline-block">
+          {word.text.map((char, index) => (
+            <span
+              key={`char-${index}`}
+              className={cn("dark:text-white text-black", word.className)}
+            >
+              {char}
+            </span>
+          ))}
+          &nbsp;
+        </div>
+      ))}
+    </div>
+  );
 
   return (
     <div className={cn("flex space-x-1 my-6", className)}>
