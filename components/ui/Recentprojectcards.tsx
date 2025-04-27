@@ -255,7 +255,7 @@ const cards = [
     {
         description: "Smart cab booking platform",
         title: "CabY",
-        src: "https://kitchen.co/blog/wp-content/uploads/2022/04/collaborating-with-developers.png",
+        src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRavTnHcY_0C49AN9fOcWSwIMIS4MQTN9AbBQ&s",
         ctaText: "Book",
         ctaLink: "https://github.com/SHREESH2004/cabY",
         content: () => {
@@ -283,7 +283,7 @@ const cards = [
     {
         description: "SafeBot Eye",
         title: "Arduino based Obstacle Detection System",
-        src: "https://content.instructables.com/ORIG/F5S/JNRW/IK11V7JK/F5SJNRWIK11V7JK.jpg?auto=webp&width=600&height=400&fit=bounds",
+        src: "https://quadstore.in/wp-content/uploads/2018/07/16in1-600x600-600x600.jpg",
         ctaText: "Buy",
         ctaLink: "Still working",
         content: () => {

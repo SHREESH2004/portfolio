@@ -16,7 +16,8 @@ module.exports = {
       "miro.medium.com",
       "media.istockphoto.com",
       "jaro-website.s3.ap-south-1.amazonaws.com",
-      "cdn.analyticsvidhya.com"// Add this domain
+      "cdn.analyticsvidhya.com",
+      "mintbook.com"// Add this domain
     ],
   },
 };

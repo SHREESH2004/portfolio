@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeProvider } from "@/components/themeprovider"; // Importing the ThemeProvider component
+import { ThemeProvider } from "@/components/themeprovider";
+import { Analytics } from "@vercel/analytics/react" // Importing the ThemeProvider component
 import "./globals.css";
 
 // Importing the custom fonts
@@ -36,6 +37,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           disableTransitionOnChange
         >
           {children}
+          <Analytics/>
         </ThemeProvider>
       </body>
     </html>
